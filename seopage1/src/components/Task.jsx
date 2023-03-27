@@ -1,34 +1,27 @@
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import { FaClipboardList, FaLayerGroup, FaLink } from 'react-icons/fa';
 import { IoCalendarOutline, IoChatbubblesOutline } from 'react-icons/io5';
 import { ModalContext } from '../App';
 import { useDrag } from 'react-dnd';
 
-const Task = ({ id, attachCount ,setI, colID}) => {
+const Task = ({ data, ct,  id, attachCount }) => {
   const { setModal } = useContext(ModalContext);
-
-  const [{isDragging}, dragRef] = useDrag({
-    item: {name: 'task'},
-    type:"task",
-    collect: mentor => ({
-      isDragging:mentor.isDragging()
+  const [{opacity}, drag] = useDrag({
+    item: data,
+    type: "task",
+    collect: m => ({
+      opacity: m.isDragging ? .5 : 1
     }),
-    end: (item, monitor) => {
-      const dropResult = monitor.getDropResult();
-      setI(dropResult.name, colID)
-    }
   });
 
-  const opacity = isDragging ? 'opacity-50' : 'opacity-100';
-  
  
   return (
-    <div ref={dragRef} className={`bg-white p-3 rounded-lg ${opacity}`}>
+    <div ref={drag} className={`bg-white p-3 rounded-lg transition-all duration-300 ${opacity}`}>
       {/* card-head */}
       <div className="flex items-center justify-between">
         <div className="flex items-center space-x-3">
           <img src="avatar.jpg" alt="avatar" className="w-8 h-8 rounded-full" />
-          <span className="font-semibold">Client Name {id} </span>
+          <span className="font-semibold">Client Name </span>
         </div>
 
         <div className="flex items-center space-x-3">

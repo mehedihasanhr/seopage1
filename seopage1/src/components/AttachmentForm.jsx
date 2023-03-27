@@ -101,15 +101,17 @@ const AttachmentForm = ({ attachment, onAttachmentChange }) => {
 
         <div className="flex flex-col items-center py-3 gap-3">
           {files.length > 0 && <h4 className="mr-auto font-bold text-gray-400">Files</h4>}
-          {files.map((file) => (
-            <div
-              key={`${file.name}-${Math.random()}}`}
-              className="flex items-center justify-between w-full bg-slate-50 hover:bg-slate-100 px-4 py-2.5"
-            >
-              <span className="block font-semibold text-gray-600 line-clamp-2 text-sm">{file.name}</span>
-              <span className="text-sm">{file.type}</span>
-            </div>
-          ))}
+          <div className="flex flex-col items-center py-3 gap-3 w-full max-h-[200px] overflow-y-auto">
+            {files.map((file) => (
+              <div
+                key={`${file.name}-${Math.random()}}`}
+                className="flex items-center justify-between w-full bg-slate-50 hover:bg-slate-100 px-4 py-2.5"
+              >
+                <span className="block font-semibold text-gray-600 line-clamp-2 text-sm">{file.name}</span>
+                <span className="text-sm">{file.type}</span>
+              </div>
+            ))}
+          </div>
         </div>
 
         {/* buttons */}
